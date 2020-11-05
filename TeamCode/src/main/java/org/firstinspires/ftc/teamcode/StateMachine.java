@@ -1,8 +1,10 @@
-package hortonvillerobotics;
+package org.firstinspires.ftc.teamcode;
+
+import hortonvillerobotics.State;
 
 public class StateMachine {
     private int current_number = 0;
-    private int state_in_progress = 1;
+    public int state_in_progress = 1;
 
     boolean next_state_to_execute() {
         return  ++current_number == state_in_progress;
@@ -19,5 +21,13 @@ public class StateMachine {
 
     public void reset(){
         state_in_progress = 1;
+    }
+
+    public void initializeMachine(){
+        current_number = 0;
+    }
+
+    public void setState_in_progress(int state_in_progress){
+        this.state_in_progress = state_in_progress;
     }
 }

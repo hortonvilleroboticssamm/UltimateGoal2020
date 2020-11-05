@@ -1,4 +1,4 @@
-package hortonvillerobotics;
+package org.firstinspires.ftc.teamcode;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -18,7 +18,6 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.TeleOP;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
+
+import hortonvillerobotics.Timer;
 
 //import android.support.annotation.Nullable;
 
@@ -42,9 +43,12 @@ public class Robot<T extends RobotConfiguration> {
 
     Telemetry telemetry;
 
+    static String[] wheelSet1 = {"mtrFrontLeft", "mtrBackRight"};
+    static String[] wheelSet2 = {"mtrFrontRight", "mtrBackLeft"};
+    static String[] wheelSetL = {"mtrFrontLeft", "mtrBackLeft"};
+    static String[] wheelSetR = {"mtrFrontRight", "mtrBackRight"};
 
-
-    public static <T extends RobotConfiguration> Robot getInstance(TeleOP opMode, T config) {
+    public static <T extends RobotConfiguration> Robot getInstance(OpMode opMode, T config) {
         currInstance = currInstance == null ? new Robot<T>(opMode, config) : currInstance;
         currInstance.opMode = opMode;
         currInstance.config = config;
@@ -202,7 +206,7 @@ public class Robot<T extends RobotConfiguration> {
 
     @Nullable
     public Double getPower(@NonNull String motorName) {
-        return (motors.get(motorName) != null) ? motors.get(motorName).getPower() : null;
+        return (motors.get(motorName) != null) ? motors.get(motorName).getPower() : -.1;
     }
 
     public void resetEncoder(@NonNull String motorName) {

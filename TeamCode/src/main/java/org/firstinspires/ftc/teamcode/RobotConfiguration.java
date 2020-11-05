@@ -1,4 +1,4 @@
-package hortonvillerobotics;
+package org.firstinspires.ftc.teamcode;
 
 public class RobotConfiguration {
 

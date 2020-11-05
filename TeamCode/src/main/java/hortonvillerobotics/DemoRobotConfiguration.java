@@ -1,5 +1,7 @@
 package hortonvillerobotics;
 
+import org.firstinspires.ftc.teamcode.RobotConfiguration;
+
 public class DemoRobotConfiguration extends RobotConfiguration {
     private static String[][] motors = {
             {"mtrLeftDrive", "forward"},
