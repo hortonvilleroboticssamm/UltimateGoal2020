@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.ArrayList;
+
 import hortonvillerobotics.FinalRobotConfiguration;
 
 @TeleOp(name = "TeleOPTest2020", group = "TeleOp")
@@ -12,14 +14,19 @@ public class TeleOP extends OpMode {
     Robot r;
 
     double drivePowerScale = 1;
-
-
     double theta1 = 0;
 
+    ArrayList<Integer> prevMotorEncvoderValues = new ArrayList<>();
+
+    ArrayList<Integer> currMotorEncoderValues = new ArrayList<>();
+
+
+
+    TestRobotConfig testRobotConfig = new TestRobotConfig();
 
     @Override
     public void init() {
-        r = Robot.getInstance(this, new TestRobotConfig());
+        r = Robot.getInstance(this,testRobotConfig);
         r.initialize(this, new TestRobotConfig());
         r.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         telemetry.addData("Init Success", 69);
@@ -29,7 +36,7 @@ public class TeleOP extends OpMode {
     public void loop() {
 
 
-
+        r.getHeadingAngle();
 
         //CONTROLLER 1
         //testxcvzv
@@ -88,5 +95,21 @@ public class TeleOP extends OpMode {
         telemetry.addData("drivePowerScale: ", drivePowerScale);
         r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
 
+    }
+
+    public void updateMotorEncoders(){
+        for(int i = 0; i<4;i++){
+            prevMotorEncvoderValues.set(i, currMotorEncoderValues.get(i));
+            currMotorEncoderValues.set(i, r.getEncoderCounts(testRobotConfig.motors[i][0]));
+        }
+    }
+
+    public int[] calculateDistance(){
+        double distanceTravel = 0.0d;
+        for(int i = 0; i < 4;i++){
+            distanceTravel+=prevMotorEncvoderValues.get(i)-currMotorEncoderValues.get(i);
+        }
+        distanceTravel/=4;
+        return new int[]{-1,-1};
     }
 }

@@ -10,7 +10,7 @@ public class TestRobotConfig extends RobotConfiguration{
     public double getCountsPerRotation(){return countsPerRotation;}
 
 
-    private static String[][] motors = {
+    public static String[][] motors = {
             {"mtrBackRight", "forward"},
             {"mtrBackLeft", "forward"},
             {"mtrFrontLeft", "forward"},
@@ -22,7 +22,7 @@ public class TestRobotConfig extends RobotConfiguration{
     };
 
     private static String[][] sensors = {
-
+            {"IMU", ""}
     };
 
     public String[][] getMotors(){return motors;}

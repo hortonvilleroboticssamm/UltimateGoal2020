@@ -11,20 +11,34 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.GyroSensor;
+import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cController;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cWaitControl;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TimestampedData;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
+import org.firstinspires.ftc.robotcore.external.navigation.Axis;
+import org.firstinspires.ftc.robotcore.internal.hardware.TimeWindow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Lock;
 
 import hortonvillerobotics.Timer;
 
@@ -262,6 +276,10 @@ public class Robot<T extends RobotConfiguration> {
         return null;
     }
 
+    public double getHeadingAngle(){
+        return 0.0d;
+    }
+
     public void resetDriveEncoders() {
         resetEncoder("mtrLeftDrive");
         resetEncoder("mtrRightDrive");
@@ -494,6 +512,23 @@ public class Robot<T extends RobotConfiguration> {
         while (!hasMotorEncoderReached(mtr, encoder)) ;
         setRunMode(mtr, DcMotor.RunMode.RUN_USING_ENCODER);
         setPower(mtr, 0);
+    }
+
+    public void getAngle(){
+        Gyroscope gyro = new Gyroscope() {
+            @Override
+            public Set<Axis> getAngularVelocityAxes() {
+                return null;
+            }
+
+            @Override
+            public AngularVelocity getAngularVelocity(AngleUnit unit) {
+                return null;
+            }
+        };
+
+
+
     }
 
 }
