@@ -42,6 +42,7 @@ import java.util.concurrent.locks.Lock;
 
 import hortonvillerobotics.Timer;
 
+
 //import android.support.annotation.Nullable;
 
 public class Robot<T extends RobotConfiguration> {
@@ -52,7 +53,7 @@ public class Robot<T extends RobotConfiguration> {
     private static Robot currInstance;
 
     public Bitmap[] cameraSnapshots;
-
+    //CadeTestCommit
     public final String[] blockLocation = {"error"};
 
     Telemetry telemetry;
