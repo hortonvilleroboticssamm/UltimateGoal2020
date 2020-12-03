@@ -22,7 +22,7 @@ public class TestRobotConfig extends RobotConfiguration{
     };
 
     private static String[][] sensors = {
-            {"IMU", ""}
+            {"BNO055", ""}
     };
 
     public String[][] getMotors(){return motors;}

@@ -16,9 +16,7 @@ public class TeleOP extends OpMode {
     double drivePowerScale = 1;
     double theta1 = 0;
 
-    ArrayList<Integer> prevMotorEncvoderValues = new ArrayList<>();
 
-    ArrayList<Integer> currMotorEncoderValues = new ArrayList<>();
 
 
 
@@ -34,10 +32,7 @@ public class TeleOP extends OpMode {
 
     @Override
     public void loop() {
-
-
-        r.getHeadingAngle();
-
+        r.getAngle();
         //CONTROLLER 1
         //testxcvzv
             /*
@@ -97,19 +92,19 @@ public class TeleOP extends OpMode {
 
     }
 
-    public void updateMotorEncoders(){
+    /*public void updateMotorEncoders(){
         for(int i = 0; i<4;i++){
             prevMotorEncvoderValues.set(i, currMotorEncoderValues.get(i));
             currMotorEncoderValues.set(i, r.getEncoderCounts(testRobotConfig.motors[i][0]));
         }
-    }
+    }*/
 
-    public int[] calculateDistance(){
+   /* public int[] calculateDistance(){
         double distanceTravel = 0.0d;
         for(int i = 0; i < 4;i++){
             distanceTravel+=prevMotorEncvoderValues.get(i)-currMotorEncoderValues.get(i);
         }
         distanceTravel/=4;
         return new int[]{-1,-1};
-    }
+    }*/
 }
