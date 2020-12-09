@@ -39,7 +39,12 @@ public class Robot<T extends RobotConfiguration> {
     private static Robot currInstance;
 
     public Bitmap[] cameraSnapshots;
-    //CadeTestCommit
+    double oldXValue=0;
+    double oldYValue=0;
+    double newXValue=0;
+    double newYValue=0;
+    String gc="True";
+
     public final String[] blockLocation = {"error"};
 
     Telemetry telemetry;
@@ -155,6 +160,8 @@ public class Robot<T extends RobotConfiguration> {
 
     }
 
+
+
     public int getAngle(){
         BNO055 imu = new BNO055(opMode.hardwareMap, "BNO055");
         telemetry.addData("Test IMU Value: ", imu.gyrX());
@@ -204,7 +211,28 @@ public class Robot<T extends RobotConfiguration> {
 
 
     //----ROBOT UTILITY FUNCTIONS----//
+    public double[] gridCoordinates(){
+        TestRobotConfig motors = new TestRobotConfig();
+        //the first column is X values, the second column is Y values
+        // the first row is Goal 1 (left most goal) second row is Goal 2 (right most goal)
+        //max coordinate values are 5834.684 in both directions
+        double[][] coordinates={
+                {1154.781,5834.684},
+                {4679.903,5834.684}
+        };
+        while(gc=="True"){
+            for(int i=0;i<motors.getMotors().length;i++){
+                newXValue+=Math.cos(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
+                newYValue+=Math.sin(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
+            }
+            newXValue=newXValue/motors.getMotors().length;
+            newYValue=newYValue/motors.getMotors().length;
+            oldXValue=newXValue;
+            oldYValue=newYValue;
 
+        }
+        return new double[]{newXValue, newYValue};
+    }
     public void setPower(@NonNull String motorName, double power) {
         if (motors.get(motorName) != null) motors.get(motorName).setPower(power);
     }
