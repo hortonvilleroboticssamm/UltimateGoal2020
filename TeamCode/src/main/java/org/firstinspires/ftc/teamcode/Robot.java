@@ -17,6 +17,7 @@ import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.util.ArrayList;
@@ -156,10 +157,14 @@ public class Robot<T extends RobotConfiguration> {
     }
 
     public int getAngle(){
-        BNO055 imu = new BNO055(opMode.hardwareMap, "BNO055");
-        telemetry.addData("Test IMU Value: ", imu.gyrX());
-
-        return imu.gyrX();
+        //BNO055 imu = new BNO055(opMode.hardwareMap, "IMU");
+        SensorBNO055IMU imu = new SensorBNO055IMU();
+        telemetry.addData("Test IMU Value: ", new Func<String>() {
+            @Override public String value() {
+                return imu.formatAngle(imu.angles.angleUnit, imu.angles.firstAngle);
+            }
+        });
+        return -1;
     }
 
     public void runParallel(@NonNull String endFlagName, @NonNull Task... tasks) {
