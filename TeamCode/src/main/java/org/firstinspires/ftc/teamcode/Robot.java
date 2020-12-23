@@ -185,10 +185,10 @@ public class Robot<T extends RobotConfiguration> {
 
 
 
-    public int getAngle(){
+    /*public int getAngle(){
 
         return -1;
-    }
+    }*/
 
     public void runParallel(@NonNull String endFlagName, @NonNull Task... tasks) {
         CountDownLatch l = new CountDownLatch(tasks.length);
@@ -241,17 +241,19 @@ public class Robot<T extends RobotConfiguration> {
                 {1154.781,5834.684},
                 {4679.903,5834.684}
         };
-        while(gc=="True"){
-            for(int i=0;i<motors.getMotors().length;i++){
-                newXValue+=Math.cos(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
-                newYValue+=Math.sin(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
-            }
-            newXValue=newXValue/motors.getMotors().length;
-            newYValue=newYValue/motors.getMotors().length;
-            oldXValue=newXValue;
-            oldYValue=newYValue;
 
-        }
+
+//        while(gc=="True"){
+//            for(int i=0;i<motors.getMotors().length;i++){
+//                newXValue+=Math.cos(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
+//                newYValue+=Math.sin(getAngle())*getEncoderCounts(motors.getMotors()[i][0]);
+//            }
+//            newXValue=newXValue/motors.getMotors().length;
+//            newYValue=newYValue/motors.getMotors().length;
+//            oldXValue=newXValue;
+//            oldYValue=newYValue;
+//
+//        }
         return new double[]{newXValue, newYValue};
     }
     public void setPower(@NonNull String motorName, double power) {
