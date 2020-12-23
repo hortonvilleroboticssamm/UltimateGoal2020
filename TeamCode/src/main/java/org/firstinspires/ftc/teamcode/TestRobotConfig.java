@@ -11,10 +11,11 @@ public class TestRobotConfig extends RobotConfiguration{
 
 
     public static String[][] motors = {
-            {"mtrBackRight", "forward"},
-            {"mtrBackLeft", "forward"},
-            {"mtrFrontLeft", "forward"},
-            {"mtrFrontRight", "forward"}
+            //{"mtrBackRight", "forward"},
+            //{"mtrBackLeft", "forward"},
+            //{"mtrFrontLeft", "forward"},
+            //{"mtrFrontRight", "forward"},
+            {"mtrCollect", "forward"}
     };
 
     private static String[][] servos = {
@@ -22,7 +23,7 @@ public class TestRobotConfig extends RobotConfiguration{
     };
 
     private static String[][] sensors = {
-            {"IMU", "forward"}
+            //{"IMU", "forward"}
     };
 
     public String[][] getMotors(){return motors;}

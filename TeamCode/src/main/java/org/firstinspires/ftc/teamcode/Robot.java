@@ -7,6 +7,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -19,7 +21,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +32,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 
 import hortonvillerobotics.Timer;
+
 
 
 //import android.support.annotation.Nullable;
@@ -42,6 +47,11 @@ public class Robot<T extends RobotConfiguration> {
     public Bitmap[] cameraSnapshots;
     //CadeTestCommit
     public final String[] blockLocation = {"error"};
+
+    BNO055 imu;
+    Orientation angles;
+
+
 
     Telemetry telemetry;
 
@@ -78,6 +88,18 @@ public class Robot<T extends RobotConfiguration> {
     }
 
     public void initialize(@NonNull OpMode opMode, T config) {
+
+        /*BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled = true;
+        parameters.loggingTag = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();*/
+
+
+        //imu = opMode.hardwareMap.get(BNO055.class, "imu");
+        
 
         motors = new HashMap<>();
         servos = new HashMap<>();
@@ -157,13 +179,7 @@ public class Robot<T extends RobotConfiguration> {
     }
 
     public int getAngle(){
-        //BNO055 imu = new BNO055(opMode.hardwareMap, "IMU");
-        SensorBNO055IMU imu = new SensorBNO055IMU();
-        telemetry.addData("Test IMU Value: ", new Func<String>() {
-            @Override public String value() {
-                return imu.formatAngle(imu.angles.angleUnit, imu.angles.firstAngle);
-            }
-        });
+
         return -1;
     }
 

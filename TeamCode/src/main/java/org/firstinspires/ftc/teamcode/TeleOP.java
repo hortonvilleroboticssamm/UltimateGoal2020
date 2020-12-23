@@ -16,8 +16,8 @@ public class TeleOP extends OpMode {
     double drivePowerScale = 1;
     double theta1 = 0;
 
-
-
+    boolean isCollecting = false;
+    boolean g1AP = false;
 
 
     TestRobotConfig testRobotConfig = new TestRobotConfig();
@@ -32,7 +32,7 @@ public class TeleOP extends OpMode {
 
     @Override
     public void loop() {
-        r.getAngle();
+        //r.getAngle();
         //CONTROLLER 1
         //testxcvzv
             /*
@@ -89,6 +89,20 @@ public class TeleOP extends OpMode {
         drivePowerScale = gamepad1.left_trigger >= .5 ? 0.25 : gamepad1.left_bumper ? 0.7 : 0.4;
         telemetry.addData("drivePowerScale: ", drivePowerScale);
         r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
+
+        telemetry.addData("isCollecting", isCollecting);
+        if(!g1AP && gamepad1.a){
+            g1AP = true;
+            isCollecting = !isCollecting;
+        }else if(!gamepad1.a) g1AP = false;
+
+        if(!isCollecting){
+            r.setPower("mtrCollect", .5);
+
+        } else{
+            r.setPower("mtrCollect", 0);
+
+        }
 
     }
 
