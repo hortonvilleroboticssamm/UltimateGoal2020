@@ -4,6 +4,7 @@ public class TestRobotConfig extends RobotConfiguration{
     private double wheelCircumference = 4.4* Math.PI;
     private double turnDiameter = 16.8;
     private double countsPerRotation = 560;
+    private double inchesPerEncoderCount = 0.02468;
 
     public double getWheelCircumference(){return wheelCircumference;}
     public double getTurnDiameter(){return turnDiameter;}

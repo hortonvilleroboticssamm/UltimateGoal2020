@@ -52,7 +52,7 @@ public class TeleOP extends OpMode {
         if (Math.abs(gamepad1.right_stick_x) < 0.075) {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
-
+//theta1 is diagonal motion not rotation
             theta1 = ((Math.atan(y / x)));
             //This series of if statements prevents us from dividing by 0
             //Because we divide by X, X != 0
