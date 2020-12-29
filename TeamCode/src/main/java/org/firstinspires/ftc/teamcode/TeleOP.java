@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TeleOP extends OpMode {
 
     @Override
     public void init() {
-        r = Robot.getInstance(this,testRobotConfig);
+        r = Robot.getInstance(this, testRobotConfig);
         r.initialize(this, new TestRobotConfig());
         r.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         telemetry.addData("Init Success", 69);
@@ -63,26 +64,26 @@ public class TeleOP extends OpMode {
             } else if (x < 0) {
                 theta1 = Math.atan(y / x) + Math.PI;
             }
-            double theta2 = Math.PI / 4 - theta1+Math.PI;
+            double theta2 = Math.PI / 4 - theta1 + Math.PI;
             double hyp = Math.sqrt(x * x + y * y);
-            boolean motorBand = Math.abs(x) > .05 || Math.abs(y)> .05;
+            boolean motorBand = Math.abs(x) > .05 || Math.abs(y) > .05;
             telemetry.addData("MotorBand", motorBand);
             telemetry.addData("x", x);
             telemetry.addData("y", y);
             double speedControl = gamepad1.right_bumper ? 1 : gamepad1.right_trigger > .4 ? .25 : .5;
-            r.setPower(Robot.wheelSet1[0], motorBand ?  hyp * Math.cos(theta2) * speedControl : 0);
+            r.setPower(Robot.wheelSet1[0], motorBand ? hyp * Math.cos(theta2) * speedControl : 0);
             r.setPower(Robot.wheelSet2[0], motorBand ? -hyp * Math.sin(theta2) * speedControl : 0);
-            r.setPower(Robot.wheelSet1[1], motorBand ?  hyp * Math.cos(theta2) * speedControl : 0);
+            r.setPower(Robot.wheelSet1[1], motorBand ? hyp * Math.cos(theta2) * speedControl : 0);
             r.setPower(Robot.wheelSet2[1], motorBand ? -hyp * Math.sin(theta2) * speedControl : 0);
             telemetry.addData("Power", r.getPower("mtrBackLeft"));
             telemetry.addData("hyp", hyp);
             telemetry.addData("theta2", theta2);
             telemetry.addData("SpeedControl", speedControl);
-        }else {
-            r.setPower(Robot.wheelSetL[0], gamepad1.right_stick_x/2);
-            r.setPower(Robot.wheelSetL[1], gamepad1.right_stick_x/2);
-            r.setPower(Robot.wheelSetR[0], -gamepad1.right_stick_x/2);
-            r.setPower(Robot.wheelSetR[1], -gamepad1.right_stick_x/2);
+        } else {
+            r.setPower(Robot.wheelSetL[0], gamepad1.right_stick_x / 2);
+            r.setPower(Robot.wheelSetL[1], gamepad1.right_stick_x / 2);
+            r.setPower(Robot.wheelSetR[0], -gamepad1.right_stick_x / 2);
+            r.setPower(Robot.wheelSetR[1], -gamepad1.right_stick_x / 2);
         }
 
 
@@ -91,18 +92,29 @@ public class TeleOP extends OpMode {
         r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
 
         telemetry.addData("isCollecting", isCollecting);
-        if(!g1AP && gamepad1.a){
+        if (!g1AP && gamepad1.a) {
             g1AP = true;
             isCollecting = !isCollecting;
-        }else if(!gamepad1.a) g1AP = false;
+        } else if (!gamepad1.a) g1AP = false;
 
-        if(!isCollecting){
+        if (!isCollecting) {
             r.setPower("mtrCollect", .5);
 
-        } else{
+        } else {
             r.setPower("mtrCollect", 0);
 
         }
+        if (gamepad2.right_bumper) {
+            r.setPower("mtrShoot", 1.0);
+        } else if (!gamepad2.right_bumper) {
+            r.setPower("mtrShoot", 0.0);
+        }
+        if (gamepad2.right_stick_y <= 0.05&&gamepad2.right_stick_y>=-0.05) {
+            r.setServoPower("srvAngle", 0.0);
+        } else {
+            r.setServoPower("srvAngle",gamepad2.right_stick_y);
+        }
+
 
     }
 

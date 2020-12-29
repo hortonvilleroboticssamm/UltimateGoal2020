@@ -12,14 +12,16 @@ public class TestRobotConfig extends RobotConfiguration{
 
 
     public static String[][] motors = {
-            //{"mtrBackRight", "forward"},
-            //{"mtrBackLeft", "forward"},
-            //{"mtrFrontLeft", "forward"},
-            //{"mtrFrontRight", "forward"},
-            {"mtrCollect", "forward"}
+            {"mtrBackRight", "forward"},
+            {"mtrBackLeft", "forward"},
+            {"mtrFrontLeft", "forward"},
+            {"mtrFrontRight", "forward"},
+            {"mtrCollect", "forward"},
+            {"mtrShoot", "forward"}
     };
 
     private static String[][] servos = {
+            {"srvAngle", "continuous"}
 
     };
 
