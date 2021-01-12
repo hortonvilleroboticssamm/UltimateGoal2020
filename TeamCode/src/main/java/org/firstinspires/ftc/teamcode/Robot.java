@@ -51,12 +51,14 @@ public class Robot<T extends RobotConfiguration> {
     double newYValue=0;
     String gc="True";
 
+    double safeSpeed = .65;
+
     public final String[] blockLocation = {"error"};
 
     BNO055 imu;
     Orientation angles;
 
-
+    public Robot(){}
 
     Telemetry telemetry;
 
@@ -69,6 +71,11 @@ public class Robot<T extends RobotConfiguration> {
         currInstance = currInstance == null ? new Robot<T>(opMode, config) : currInstance;
         currInstance.opMode = opMode;
         currInstance.config = config;
+        return currInstance;
+    }
+
+    public static Robot getInstance() {
+        currInstance = currInstance == null ? new Robot<>() : currInstance;
         return currInstance;
     }
 
