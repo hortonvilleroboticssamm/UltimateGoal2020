@@ -163,6 +163,9 @@ public class Robot<T extends RobotConfiguration> {
         }
 
         for (String[] sensorData : config.getSensors()) {
+            if(sensorData == null){
+                Log.v("Robot", "SensorData null");
+            }
             try {
                 String sensorName = sensorData[0];
                 if (sensorData.length > 1) {

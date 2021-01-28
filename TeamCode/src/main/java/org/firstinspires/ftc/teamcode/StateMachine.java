@@ -272,6 +272,7 @@ class StateMachine{
     public int getPos(){
         if(next_state_to_execute()) {
             return 1;
+
         }
         return 1;
     }

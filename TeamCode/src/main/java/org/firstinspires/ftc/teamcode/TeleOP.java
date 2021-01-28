@@ -48,7 +48,8 @@ public class TeleOP extends OpMode {
             Left Trigger    -       25% Drive Power
             Left Bumper     -       50% Drive Power
              */
-
+        WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
+        telemetry.addData("Color Reading Red", wobbleGoalGetter.getRed(false));
         telemetry.addData("Doing it: ", 69);
         if (Math.abs(gamepad1.right_stick_x) < 0.075) {
             double x = gamepad1.left_stick_x;

@@ -89,6 +89,12 @@ public class Autonomous1 extends OpMode {
         sm.initializeMachine();
         int wobblePos = sm.getPos();
 
+        WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
+
+        telemetry.addData("Lower Senosr, Red: ", wobbleGoalGetter.getRed(true));
+        //telemetry.addData("Lower Sensor, Blue: ", wobbleGoalGetter.getBlue(true));
+        //telemetry.addData("Lower Sensor, Green: ", wobbleGoalGetter.getGreen(true));
+
         if(allianceColor.equals("blue")){
             if(pos == 1){
 
@@ -106,7 +112,8 @@ public class Autonomous1 extends OpMode {
 
                 }
 
-
+            }
+            else if(pos == 2){
 
             }
         }

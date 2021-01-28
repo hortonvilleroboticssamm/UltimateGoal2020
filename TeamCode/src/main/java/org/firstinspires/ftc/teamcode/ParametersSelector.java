@@ -21,7 +21,8 @@ public class ParametersSelector extends RobotConfiguration{
     };
 
     private static String[][] sensors = {
-            //{"IMU", "forward"}
+            {"lowerSensor", "3c"},
+            {"higherSensor", "1a"}
     };
 
     public String[][] getMotors(){return motors;}
