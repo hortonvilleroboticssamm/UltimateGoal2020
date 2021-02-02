@@ -96,26 +96,25 @@ public class Autonomous1 extends OpMode {
         //telemetry.addData("Lower Sensor, Green: ", wobbleGoalGetter.getGreen(true));
 
         if(allianceColor.equals("blue")){
-            if(pos == 1){
 
-                switch(wobblePos){
-                    case 1:
-                        sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
-                        sm.translate(90, r.safeSpeed, blue_x_p1[wobblePos-1]);
-                        break;
-                    case 2:
-                        sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
-                        sm.translate(-90, r.safeSpeed, blue_x_p1[wobblePos-1]);
-                    case 3:
-                        sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
-                        sm.translate(-90, r.safeSpeed, blue_x_p1[wobblePos-1]);
 
-                }
-
+            switch(wobblePos){
+                case 1:
+                    sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
+                    sm.translate(90, r.safeSpeed, blue_x_p1[wobblePos-1]);
+                    break;
+                case 2:
+                    sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
+                    sm.translate(-90, r.safeSpeed, blue_x_p1[wobblePos-1]);
+                    break;
+                case 3:
+                    sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
+                    sm.translate(-90, r.safeSpeed, blue_x_p1[wobblePos-1]);
+                    break;
             }
-            else if(pos == 2){
 
-            }
+
+
         }
 
     }
