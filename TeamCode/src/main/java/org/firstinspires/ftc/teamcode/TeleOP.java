@@ -22,7 +22,7 @@ public class TeleOP extends OpMode {
 
 
     TestRobotConfig testRobotConfig = new TestRobotConfig();
-
+    int a = 0;
     @Override
     public void init() {
         r = Robot.getInstance(this, testRobotConfig);
