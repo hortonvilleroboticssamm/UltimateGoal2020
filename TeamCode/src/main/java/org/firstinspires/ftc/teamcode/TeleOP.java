@@ -76,10 +76,7 @@ public class TeleOP extends OpMode {
             r.setPower(Robot.wheelSet2[0], motorBand ? -hyp * Math.sin(theta2) * speedControl : 0);
             r.setPower(Robot.wheelSet1[1], motorBand ? hyp * Math.cos(theta2) * speedControl : 0);
             r.setPower(Robot.wheelSet2[1], motorBand ? -hyp * Math.sin(theta2) * speedControl : 0);
-            telemetry.addData("Power", r.getPower("mtrBackLeft"));
-            telemetry.addData("hyp", hyp);
-            telemetry.addData("theta2", theta2);
-            telemetry.addData("SpeedControl", speedControl);
+
         } else {
             r.setPower(Robot.wheelSetL[0], gamepad1.right_stick_x / 2);
             r.setPower(Robot.wheelSetL[1], gamepad1.right_stick_x / 2);

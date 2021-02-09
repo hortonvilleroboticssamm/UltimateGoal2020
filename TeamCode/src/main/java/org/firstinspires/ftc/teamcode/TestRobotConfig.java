@@ -13,9 +13,9 @@ public class TestRobotConfig extends RobotConfiguration{
 
     public static String[][] motors = {
             {"mtrBackRight", "forward"},
-            {"mtrBackLeft", "forward"},
+            {"mtrBackLeft", "reverse"},
             {"mtrFrontLeft", "forward"},
-            {"mtrFrontRight", "forward"},
+            {"mtrFrontRight", "reverse"},
             {"mtrCollect", "forward"},
             {"mtrShoot", "forward"}
     };
