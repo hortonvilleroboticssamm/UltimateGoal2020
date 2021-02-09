@@ -20,7 +20,7 @@ public class TeleOP extends OpMode {
     boolean isCollecting = false;
     boolean g1AP = false;
 
-
+    //revert
     TestRobotConfig testRobotConfig = new TestRobotConfig();
     int a = 0;
     @Override
@@ -28,7 +28,7 @@ public class TeleOP extends OpMode {
         r = Robot.getInstance(this, testRobotConfig);
         r.initialize(this, new TestRobotConfig());
         r.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        telemetry.addData("Init Success", 69);
+        //telemetry.addData("Init Success", 69);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TeleOP extends OpMode {
              */
         WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
         telemetry.addData("Color Reading Red", wobbleGoalGetter.getRed(false));
-        telemetry.addData("Doing it: ", 69);
+        //telemetry.addData("Doing it: ", 69);
         if (Math.abs(gamepad1.right_stick_x) < 0.075) {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
@@ -96,10 +96,12 @@ public class TeleOP extends OpMode {
         } else if (!gamepad1.a) g1AP = false;
 
         if (!isCollecting) {
-            r.setPower("mtrCollect", .5);
+            r.setPower("mtrCollect1.-", .5);
+            r.setPower("mtrCollect2", .5);
 
         } else {
-            r.setPower("mtrCollect", 0);
+            r.setPower("mtrCollect1", 0);
+            r.setPower("mtrCollect2", 0);
 
         }
         if (gamepad2.right_bumper) {
