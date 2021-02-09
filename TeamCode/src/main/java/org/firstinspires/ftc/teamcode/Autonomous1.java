@@ -87,7 +87,7 @@ public class Autonomous1 extends OpMode {
     @Override
     public void loop() {
         sm.initializeMachine();
-        int wobblePos = sm.getPos();
+        int wobblePos = sm .getPos();
 
         WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
 

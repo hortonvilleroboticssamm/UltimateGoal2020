@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.TestRobotConfig;
+
 import java.util.ArrayList;
 
 import hortonvillerobotics.FinalRobotConfiguration;
@@ -50,7 +53,7 @@ public class TeleOP extends OpMode {
              */
         WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
         telemetry.addData("Color Reading Red", wobbleGoalGetter.getRed(false));
-        telemetry.addData("Doing it: ", 69);
+
         if (Math.abs(gamepad1.right_stick_x) < 0.075) {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
@@ -95,11 +98,13 @@ public class TeleOP extends OpMode {
             isCollecting = !isCollecting;
         } else if (!gamepad1.a) g1AP = false;
 
-        if (!isCollecting) {
-            r.setPower("mtrCollect", .5);
+        if (isCollecting) {
+            r.setPower("mtrCollect1", .5);
+            r.setPower("mtrCollect2", .5);
 
         } else {
-            r.setPower("mtrCollect", 0);
+            r.setPower("mtrCollect1", 0);
+            r.setPower("mtrCollect2", 0);
 
         }
         if (gamepad2.right_bumper) {
@@ -108,9 +113,9 @@ public class TeleOP extends OpMode {
             r.setPower("mtrShoot", 0.0);
         }
         if (gamepad2.right_stick_y <= 0.05&&gamepad2.right_stick_y>=-0.05) {
-            r.setServoPower("srvAngle", 0.0);
+            r.setPower("mtrAngle", 0.0);
         } else {
-            r.setServoPower("srvAngle",gamepad2.right_stick_y);
+            r.setPower("mtrAngle",gamepad2.right_stick_y);
         }
 
 
