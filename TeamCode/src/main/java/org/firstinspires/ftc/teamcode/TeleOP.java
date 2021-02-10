@@ -17,6 +17,9 @@ public class TeleOP extends OpMode {
     double drivePowerScale = 1;
     double theta1 = 0;
 
+    double rightSideCompensation = .31;
+    double leftSideCompensation = 0.0;
+
     boolean isCollecting = false;
     boolean g1AP = false;
 
@@ -51,7 +54,37 @@ public class TeleOP extends OpMode {
         WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
         telemetry.addData("Color Reading Red", wobbleGoalGetter.getRed(false));
         //telemetry.addData("Doing it: ", 69);
-        if (Math.abs(gamepad1.right_stick_x) < 0.075) {
+        if (Math.abs(gamepad1.left_stick_y) > .075){
+            double speedControl = gamepad1.right_bumper ? 1 : gamepad1.right_trigger > .4 ? .25 : .5;
+            double rightStick = gamepad1.right_stick_y;
+            double leftStick = gamepad1.left_stick_y;
+
+            boolean motorBandL = Math.abs(leftStick) > .05;
+
+            r.setPower(Robot.wheelSetL[0], motorBandL ? leftStick * speedControl + ((leftStick<0) ? -rightSideCompensation : rightSideCompensation) : 0);
+            r.setPower(Robot.wheelSetL[1], motorBandL ? leftStick * speedControl : 0);
+        }else{
+            r.setPower(Robot.wheelSetL[0],0);
+            r.setPower(Robot.wheelSetL[1], 0);
+        }
+        if(Math.abs(gamepad1.right_stick_y) > .075){
+            double speedControl = gamepad1.right_bumper ? 1 : gamepad1.right_trigger > .4 ? .25 : .5;
+            double rightStick = gamepad1.right_stick_y;
+            boolean motorBandR = Math.abs(rightStick) > .05;
+            r.setPower(Robot.wheelSetR[0], motorBandR ? rightStick * speedControl : 0);
+            r.setPower(Robot.wheelSetR[1], motorBandR ? rightStick * speedControl : 0);
+        } else {
+            r.setPower(Robot.wheelSetR[0], 0);
+            r.setPower(Robot.wheelSetR[1], 0);
+        }
+        if(gamepad1.dpad_down){
+            rightSideCompensation -= .01;
+        }
+        if(gamepad1.dpad_up){
+            rightSideCompensation += .01;
+        }
+        telemetry.addData("Right: ", rightSideCompensation);
+        /*if (Math.abs(gamepad1.right_stick_x) > 0.075) {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
 //theta1 is diagonal motion not rotation
@@ -84,12 +117,10 @@ public class TeleOP extends OpMode {
             r.setPower(Robot.wheelSetR[1], -gamepad1.right_stick_x / 2);
         }
 
-
         drivePowerScale = gamepad1.left_trigger >= .5 ? 0.25 : gamepad1.left_bumper ? 0.7 : 0.4;
         telemetry.addData("drivePowerScale: ", drivePowerScale);
         r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
-
-        telemetry.addData("isCollecting", isCollecting);
+        telemetry.addData("isCollecting", isCollecting);*/
         if (!g1AP && gamepad1.a) {
             g1AP = true;
             isCollecting = !isCollecting;

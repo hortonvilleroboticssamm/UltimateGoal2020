@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import hortonvillerobotics.State;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous", group = "Testing")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous", group = "Autonomous")
 public class Autonomous1 extends OpMode {
 
     Robot r;
