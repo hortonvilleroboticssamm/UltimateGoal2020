@@ -9,6 +9,7 @@ public class TestRobotConfig extends RobotConfiguration{
     public double getWheelCircumference(){return wheelCircumference;}
     public double getTurnDiameter(){return turnDiameter;}
     public double getCountsPerRotation(){return countsPerRotation;}
+    //we need to go 65 inches for autonomous
 
 
     public static String[][] motors = {
@@ -17,11 +18,12 @@ public class TestRobotConfig extends RobotConfiguration{
             {"mtrFrontLeft", "Forward"},
             {"mtrFrontRight", "forward"},
             {"mtrCollect", "forward"},
-            {"mtrShoot", "forward"}
+            {"mtrShoot", "forward"},
+            {"mtrAngle","forward"}
     };
 
     private static String[][] servos = {
-            {"srvAngle", "continuous"}
+
 
     };
 
