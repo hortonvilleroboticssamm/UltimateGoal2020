@@ -141,9 +141,9 @@ public class TeleOP extends OpMode {
             r.setPower("mtrShoot", 0.0);
         }
         if (gamepad2.right_stick_y <= 0.05&&gamepad2.right_stick_y>=-0.05) {
-            r.setServoPower("srvAngle", 0.0);
+            r.setPower("mtrAngle", 0.0);
         } else {
-            r.setServoPower("srvAngle",gamepad2.right_stick_y);
+            r.setPower("mtrAngle",gamepad2.right_stick_y);
         }
 
 

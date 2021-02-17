@@ -7,8 +7,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -19,11 +17,9 @@ import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,16 +64,20 @@ public class Robot<T extends RobotConfiguration> {
     static String[] wheelSetR = {"mtrFrontRight", "mtrBackRight"};
 
     public static <T extends RobotConfiguration> Robot getInstance(OpMode opMode, T config) {
-        currInstance = currInstance == null ? new Robot<T>(opMode, config) : currInstance;
+        currInstance = currInstance == null ? new Robot<T>() : currInstance;
         currInstance.opMode = opMode;
         currInstance.config = config;
         return currInstance;
     }
-
     public static Robot getInstance() {
         currInstance = currInstance == null ? new Robot<>() : currInstance;
         return currInstance;
     }
+
+//    public static Robot getInstance() {
+//        currInstance = currInstance == null ? new Robot<>() : currInstance;
+//        return currInstance;
+//    }
 
     public Map<String, DcMotor> motors;
     public Map<String, HardwareDevice> servos;
@@ -95,9 +95,9 @@ public class Robot<T extends RobotConfiguration> {
         double getSample();
     }
 
-    private Robot(OpMode opMode, T config) {
-        initialize(opMode, config);
-    }
+//    private Robot() {
+//        initialize(opMode, config);
+//    }
 
     public void initialize(@NonNull OpMode opMode, T config) {
 

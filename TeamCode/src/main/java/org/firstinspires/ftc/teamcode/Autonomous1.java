@@ -87,7 +87,7 @@ public class Autonomous1 extends OpMode {
     @Override
     public void loop() {
         sm.initializeMachine();
-        int wobblePos = sm.getPos();
+        int wobblePos = sm .getPos();
 
         WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
 
@@ -117,5 +117,19 @@ public class Autonomous1 extends OpMode {
 
         }
 
+    }
+    public void autonomousDrive(){
+        double frontRightEncoder=r.getEncoderCounts("mtrFrontRight");
+        while(r.getEncoderCounts("mtrFrontRight")<frontRightEncoder+2634){
+            r.setPower("mtrFrontRight",0.5);
+            r.setPower("mtrFrontLeft",0.5);
+            r.setPower("mtrBackRight",0.5);
+            r.setPower("mtrBackLeft",0.5);
+        }
+        r.setPower("mtrFrontRight",0);
+        r.setPower("mtrFrontLeft",0);
+        r.setPower("mtrBackRight",0);
+        r.setPower("mtrBackLeft",0);
+        r.setPower("mtrShoot",1.0);
     }
 }
