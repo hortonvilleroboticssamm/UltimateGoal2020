@@ -17,7 +17,8 @@ public class TestRobotConfig extends RobotConfiguration{
             {"mtrBackLeft", "reverse"},
             {"mtrFrontLeft", "Forward"},
             {"mtrFrontRight", "forward"},
-            {"mtrCollect", "forward"},
+            {"mtrCollect1", "forward"},
+            {"mtrCollect2","reverse"},
             {"mtrShoot", "forward"},
             {"mtrAngle","forward"}
     };

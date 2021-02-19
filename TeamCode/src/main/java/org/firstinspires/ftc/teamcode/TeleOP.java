@@ -31,6 +31,7 @@ public class TeleOP extends OpMode {
         r = Robot.getInstance(this, testRobotConfig);
         r.initialize(this, new TestRobotConfig());
         r.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        ((DcMotor) r.motors.get("mtrShoot")).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         //telemetry.addData("Init Success", 69);
     }
 
@@ -84,6 +85,8 @@ public class TeleOP extends OpMode {
             rightSideCompensation += .01;
         }
         telemetry.addData("Right: ", rightSideCompensation);
+
+//        r.setDrivePower();
         /*if (Math.abs(gamepad1.right_stick_x) > 0.075) {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
@@ -121,19 +124,29 @@ public class TeleOP extends OpMode {
         telemetry.addData("drivePowerScale: ", drivePowerScale);
         r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
         telemetry.addData("isCollecting", isCollecting);*/
-        if (!g1AP && gamepad1.a) {
-            g1AP = true;
-            isCollecting = !isCollecting;
-        } else if (!gamepad1.a) g1AP = false;
-
-        if (!isCollecting) {
-            r.setPower("mtrCollect1.-", .5);
-            r.setPower("mtrCollect2", .5);
-
-        } else {
-            r.setPower("mtrCollect1", 0);
-            r.setPower("mtrCollect2", 0);
-
+//        if (!g1AP && gamepad1.a) {
+//            g1AP = true;
+//            isCollecting = !isCollecting;
+//        } else if (!gamepad1.a) g1AP = false;
+//
+//        if (!isCollecting) {
+//            r.setPower("mtrCollect1.-", .5);
+//            r.setPower("mtrCollect2", .5);
+//
+//        } else {
+//            r.setPower("mtrCollect1", 0);
+//            r.setPower("mtrCollect2", 0);
+//
+//        }
+        if(gamepad1.right_bumper){
+            r.setPower("mtrCollect2",1);
+        }else if(!gamepad1.right_bumper){
+            r.setPower("mtrCollect2",0);
+        }
+        if(gamepad1.left_bumper){
+            r.setPower("mtrCollect1",1);
+        }else if(!gamepad1.left_bumper){
+            r.setPower("mtrCollect1",0);
         }
         if (gamepad2.right_bumper) {
             r.setPower("mtrShoot", 1.0);
