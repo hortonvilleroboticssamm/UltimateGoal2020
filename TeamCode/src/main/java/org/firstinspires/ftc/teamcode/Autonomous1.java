@@ -92,11 +92,11 @@ public class Autonomous1 extends OpMode {
 
     public void loop() {
 
-        if(r.getEncoderCounts("mtrFrontRight")<frontRightEncoder+2634) {
-            r.setPower("mtrFrontRight", 0.5);
-            r.setPower("mtrFrontLeft", 0.5);
-            r.setPower("mtrBackRight", 0.5);
-            r.setPower("mtrBackLeft", 0.5);
+        if(r.getEncoderCounts("mtrFrontRight")>frontRightEncoder-2634) {
+            r.setPower("mtrFrontRight", -0.5);
+            r.setPower("mtrFrontLeft", -0.5);
+            r.setPower("mtrBackRight", -0.5);
+            r.setPower("mtrBackLeft", -0.5);
         }else{
             r.setPower("mtrBackRight", 0.0);
             r.setPower("mtrFrontLeft", 0.0);
