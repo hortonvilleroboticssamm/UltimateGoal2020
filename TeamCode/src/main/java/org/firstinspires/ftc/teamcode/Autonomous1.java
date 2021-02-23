@@ -21,17 +21,16 @@ import java.util.ArrayList;
 
 import hortonvillerobotics.State;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous", group = "Autonomous")
+@Autonomous(name = "Autonomous1", group = "Testing")
 public class Autonomous1 extends OpMode {
-
     Robot r;
-    StateMachine sm = new StateMachine();
+    //StateMachine sm = new StateMachine();
 
-    boolean gpPressed = false;
+    /*boolean gpPressed = false;
     //Angles
-    double[] blue_y_p1 = new double[]{5,7,9};
-    double[] blue_x_p1 = new double[]{-.5,.5,-.5};
-    //this is a comment
+    double[] blue_y_p1 = new double[]{5, 7, 9};
+    double[] blue_x_p1 = new double[]{-.5, .5, -.5};
+
 
     int pos = 0;
 
@@ -45,51 +44,94 @@ public class Autonomous1 extends OpMode {
     @Override
     public void init() {
         r = Robot.getInstance(this, new ParametersSelector());
+   pos = 2;
+                        }
+                        if (gamepad1.dpad_down) {
+                            sm.incrementState();
+                        }
+                    }
+            )
+*/
 
+   // }
 
+//        @Override
+//        public void init_loop() {
+//
+//
+//            sm.runStates(() -> {
+//                        telemetry.addData("Alliance Color:", allianceColor);
+//
+//                        if (gamepad1.x) {
+//                            allianceColor = "blue";
+//                        }
+//                        if (gamepad1.b) {
+//                            allianceColor = "red";
+//                        }
+//                        if (gamepad1.dpad_down) {
+//                            sm.incrementState();
+//                        }
+//                    }, () -> {
+//                        telemetry.addData("Pos: ", pos);
+//                        if (gamepad1.x) {
+//                            pos = 1;
+//                        }
+//                        if (gamepad1.b) {
+//
+//        }
+
+//    @Override
+//}n
+
+    double frontRightEncoder;
+    public void init() {
+        r = Robot.getInstance(this, new TestRobotConfig());
+        r.initialize(this, new TestRobotConfig());
+        frontRightEncoder=r.getEncoderCounts("mtrFrontRight");
     }
 
-    @Override
-    public void init_loop() {
-        sm.runStates(() -> {
-                    telemetry.addData("Alliance Color:", allianceColor);
-
-                    if (gamepad1.x) {
-                        allianceColor = "blue";
-                    }
-                    if (gamepad1.b) {
-                        allianceColor = "red";
-                    }
-                    if (gamepad1.dpad_down) {
-                        sm.incrementState();
-                    }
-                }, () -> {
-                    telemetry.addData("Pos: ", pos);
-                    if (gamepad1.x) {
-                        pos = 1;
-                    }
-                    if (gamepad1.b) {
-                        pos = 2;
-                    }
-                    if (gamepad1.dpad_down) {
-                        sm.incrementState();
-                    }
-                }
-        );
-
-    }
-
-    @Override
-    public void start() {
-        sm.reset();
-    }
-
-    @Override
     public void loop() {
-        sm.initializeMachine();
-        int wobblePos = sm .getPos();
 
-        WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
+        if(r.getEncoderCounts("mtrFrontRight")<frontRightEncoder+2634) {
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+//        r.setPower("mtrShoot", -1.0);
+
+
+
+    }
+
+      //stop();
+
+
+//        @Override
+//        public void stop(){
+//    }
+//Cade's Original Autonomous
+ /*   public void autonomousDrive(){
+            frontRightEncoder=r.getEncoderCounts("mtrFrontRight");
+        while(r.getEncoderCounts("mtrFrontRight")<frontRightEncoder+2634) {
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }
+        r.setPower("mtrFrontRight",1.0);
+        r.setPower("mtrFrontLeft",1.0);
+        r.setPower("mtrBackRight",1.0);
+        r.setPower("mtrBackLeft",1.0);
+        r.setPower("mtrShoot",1.0);
+    }
+*/
+        /*WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
 
         telemetry.addData("Lower Senosr, Red: ", wobbleGoalGetter.getRed(true));
         //telemetry.addData("Lower Sensor, Blue: ", wobbleGoalGetter.getBlue(true));
@@ -98,7 +140,7 @@ public class Autonomous1 extends OpMode {
         if(allianceColor.equals("blue")){
 
 
-            switch(wobblePos){
+  /*          switch(wobblePos){
                 case 1:
                     sm.translate(0, r.safeSpeed, blue_y_p1[wobblePos-1]);
                     sm.translate(90, r.safeSpeed, blue_x_p1[wobblePos-1]);
@@ -113,23 +155,8 @@ public class Autonomous1 extends OpMode {
                     break;
             }
 
-
+*/
 
         }
 
-    }
-    public void autonomousDrive(){
-        double frontRightEncoder=r.getEncoderCounts("mtrFrontRight");
-        while(r.getEncoderCounts("mtrFrontRight")<frontRightEncoder+2634){
-            r.setPower("mtrFrontRight",0.5);
-            r.setPower("mtrFrontLeft",0.5);
-            r.setPower("mtrBackRight",0.5);
-            r.setPower("mtrBackLeft",0.5);
-        }
-        r.setPower("mtrFrontRight",0);
-        r.setPower("mtrFrontLeft",0);
-        r.setPower("mtrBackRight",0);
-        r.setPower("mtrBackLeft",0);
-        r.setPower("mtrShoot",1.0);
-    }
-}
+
