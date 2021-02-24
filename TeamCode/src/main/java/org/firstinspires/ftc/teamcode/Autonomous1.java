@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.function.BiConsumer;
 
 import hortonvillerobotics.State;
 
@@ -53,7 +54,7 @@ public class Autonomous1 extends OpMode {
             )
 */
 
-   // }
+    // }
 
 //        @Override
 //        public void init_loop() {
@@ -84,32 +85,36 @@ public class Autonomous1 extends OpMode {
 //}n
 
     double frontRightEncoder;
+
     public void init() {
         r = Robot.getInstance(this, new TestRobotConfig());
         r.initialize(this, new TestRobotConfig());
-        frontRightEncoder=r.getEncoderCounts("mtrFrontRight");
+        frontRightEncoder = r.getEncoderCounts("mtrFrontRight");
     }
 
     public void loop() {
 
-        if(r.getEncoderCounts("mtrFrontRight")>frontRightEncoder-2634) {
-            r.setPower("mtrFrontRight", -0.5);
+        if (r.getEncoderCounts("mtrFrontRight") > frontRightEncoder - 3000) {
+            r.setPower("mtrFrontRight", -0.4);
             r.setPower("mtrFrontLeft", -0.5);
-            r.setPower("mtrBackRight", -0.5);
+            r.setPower("mtrBackRight", -0.4);
             r.setPower("mtrBackLeft", -0.5);
-        }else{
+        } else {
             r.setPower("mtrBackRight", 0.0);
             r.setPower("mtrFrontLeft", 0.0);
-            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrFrontRight", 0.0);
             r.setPower("mtrBackLeft", 0.0);
         }
+        telemetry.addData("LF Power", r.getPower("mtrFrontLeft"));
+        telemetry.addData("LB Power", r.getPower("mtrBackLeft"));
+        telemetry.addData("RF Power", r.getPower("mtrFrontRight"));
+        telemetry.addData("RB Power", r.getPower("mtrBackRight"));
 //        r.setPower("mtrShoot", -1.0);
-
 
 
     }
 
-      //stop();
+    //stop();
 
 
 //        @Override
@@ -157,6 +162,6 @@ public class Autonomous1 extends OpMode {
 
 */
 
-        }
+}
 
 

@@ -104,12 +104,12 @@ public class TeleOP extends OpMode {
 //            isCollecting = !isCollecting;
 //        } else if (!gamepad1.a) g1AP = false;
 
-        r.setPower("mtrCollect1", gamepad2.right_bumper ? 1 : gamepad2.right_trigger > 0.5 ? -1 : 0);
-        r.setPower("mtrCollect2", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
+        r.setPower("mtrCollect1", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
+        r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
         
-        if (gamepad1.right_bumper) {
+        if (gamepad2.right_bumper) {
             r.setPower("mtrShoot", -1.0);
-        } else if (!gamepad1.right_bumper) {
+        } else if (!gamepad2.right_bumper) {
             r.setPower("mtrShoot", 0.0);
         }
 //          ***UNUSED DUE TO CURRENT BUILD****
