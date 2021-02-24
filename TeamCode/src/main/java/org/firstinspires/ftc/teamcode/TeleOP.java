@@ -31,7 +31,7 @@ public class TeleOP extends OpMode {
         r = Robot.getInstance(this, testRobotConfig);
         r.initialize(this, new TestRobotConfig());
         r.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        telemetry.addData("Init Success", 69);
+        ((DcMotor) r.motors.get("mtrShoot")).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     @Override
@@ -98,22 +98,18 @@ public class TeleOP extends OpMode {
 //        telemetry.addData("drivePowerScale: ", drivePowerScale);
 //        r.setDrivePower(Math.abs(gamepad1.left_stick_y) > 0.05 && !gamepad1.left_stick_button ? drivePowerScale * gamepad1.left_stick_y : 0, Math.abs(gamepad1.right_stick_y) > 0.05 && !gamepad1.right_stick_button ? drivePowerScale * gamepad1.right_stick_y : 0);
 
-        telemetry.addData("isCollecting", isCollecting);
-        if (!g1AP && gamepad1.a) {
-            g1AP = true;
-            isCollecting = !isCollecting;
-        } else if (!gamepad1.a) g1AP = false;
+//        telemetry.addData("isCollecting", isCollecting);
+//        if (!g1AP && gamepad1.a) {
+//            g1AP = true;
+//            isCollecting = !isCollecting;
+//        } else if (!gamepad1.a) g1AP = false;
 
-        if (!isCollecting) {
-            r.setPower("mtrCollect", .5);
-
-         } else {
-            r.setPower("mtrCollect", 0);
-
-        }
-        if (gamepad2.right_bumper) {
+        r.setPower("mtrCollect1", gamepad2.right_bumper ? 1 : gamepad2.right_trigger > 0.5 ? -1 : 0);
+        r.setPower("mtrCollect2", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
+        
+        if (gamepad1.right_bumper) {
             r.setPower("mtrShoot", -1.0);
-        } else if (!gamepad2.right_bumper) {
+        } else if (!gamepad1.right_bumper) {
             r.setPower("mtrShoot", 0.0);
         }
 //          ***UNUSED DUE TO CURRENT BUILD****
@@ -124,19 +120,22 @@ public class TeleOP extends OpMode {
             r.setServoPower("srvAngle",gamepad2.right_stick_y);
         }
 */
-        if (!g2BL && gamepad2.left_bumper)   {
-            g2BL = true;
-            isCollecting = isCollecting;
-        } else if (!gamepad2.left_bumper) g2BL = false;
-
-        if (gamepad2.left_bumper && count == 0 && !isCollecting) {
-
-            r.setServoPosition("srvFlip", 1.0);//Set to open
-        count ++;
-        }    else if(gamepad2.left_bumper && count == 1 && !isCollecting) {
-            r.setServoPosition("srvFlip", 0.0); //Set to close
-            count -- ;
-        }
+        
+//TODO: CHECK FOR VALIDITY
+        
+//        if (!g2BL && gamepad2.left_bumper)   {
+//            g2BL = true;
+//            isCollecting = isCollecting;
+//        } else if (!gamepad2.left_bumper) g2BL = false;
+//
+//        if (gamepad2.left_bumper && count == 0 && !isCollecting) {
+//
+//            r.setServoPosition("srvFlip", 1.0);//Set to open
+//        count ++;
+//        }    else if(gamepad2.left_bumper && count == 1 && !isCollecting) {
+//            r.setServoPosition("srvFlip", 0.0); //Set to close
+//            count -- ;
+//        }
     }
 
     /*public void updateMotorEncoders(){
