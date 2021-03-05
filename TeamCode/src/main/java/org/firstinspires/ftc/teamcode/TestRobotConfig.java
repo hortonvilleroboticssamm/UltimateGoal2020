@@ -5,6 +5,7 @@ public class TestRobotConfig extends RobotConfiguration{
     private double turnDiameter = 16.8;
     private double countsPerRotation = 560;
     private double inchesPerEncoderCount = 0.02468;
+    private double encoderCountsPerInch = 40.51864;
 
     public double getWheelCircumference(){return wheelCircumference;}
     public double getTurnDiameter(){return turnDiameter;}
@@ -24,8 +25,8 @@ public class TestRobotConfig extends RobotConfiguration{
     };
 
     private static String[][] servos = {
-
-
+            {"srvArm","continuous"},
+            {"srvClaw","continuous"}
     };
 
     private static String[][] sensors = {

@@ -266,6 +266,9 @@ public class Robot<T extends RobotConfiguration> {
 //        }
         return new double[]{newXValue, newYValue};
     }
+    public double setEncoder(@NonNull double inches){
+        return inches*40.51864;
+    }
     public void setPower(@NonNull String motorName, double power) {
         if (motors.get(motorName) != null) motors.get(motorName).setPower(power);
     }

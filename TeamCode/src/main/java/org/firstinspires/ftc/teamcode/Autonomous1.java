@@ -113,6 +113,9 @@ public class Autonomous1 extends OpMode {
 
 
     }
+    public void positionA(){
+
+    }
 
     //stop();
 

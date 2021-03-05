@@ -26,6 +26,7 @@ public class TeleOP extends OpMode {
 
     TestRobotConfig testRobotConfig = new TestRobotConfig();
     int a = 0;
+
     @Override
     public void init() {
         r = Robot.getInstance(this, testRobotConfig);
@@ -106,11 +107,27 @@ public class TeleOP extends OpMode {
 
         r.setPower("mtrCollect1", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
         r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
-        
+
         if (gamepad2.right_bumper) {
             r.setPower("mtrShoot", -1.0);
         } else if (!gamepad2.right_bumper) {
             r.setPower("mtrShoot", 0.0);
+        }
+        boolean arm = false;
+        boolean claw = false;
+        if (gamepad2.a && arm == false) {
+            r.setServoPower("srvArm", .75);
+            arm = true;
+        } else if (gamepad2.a && arm == true) {
+            r.setServoPower("srvArm", -.75);
+            arm = false;
+        }
+        if (gamepad2.b && claw == false) {
+            r.setServoPower("srvClaw", .75);
+            claw = true;
+        } else if (gamepad2.b && claw == true) {
+            r.setServoPower("srvClaw", -.75);
+            claw = false;
         }
 //          ***UNUSED DUE TO CURRENT BUILD****
 /*
@@ -120,9 +137,9 @@ public class TeleOP extends OpMode {
             r.setServoPower("srvAngle",gamepad2.right_stick_y);
         }
 */
-        
+
 //TODO: CHECK FOR VALIDITY
-        
+
 //        if (!g2BL && gamepad2.left_bumper)   {
 //            g2BL = true;
 //            isCollecting = isCollecting;
@@ -154,3 +171,4 @@ public class TeleOP extends OpMode {
         return new int[]{-1,-1};
     }*/
 }
+
