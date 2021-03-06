@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+ package org.firstinspires.ftc.teamcode;
 
 public class TestRobotConfig extends RobotConfiguration{
     private double wheelCircumference = 4.4* Math.PI;
@@ -26,7 +26,8 @@ public class TestRobotConfig extends RobotConfiguration{
 
     private static String[][] servos = {
             {"srvArm","continuous"},
-            {"srvClaw","continuous"}
+            {"srvClaw","continuous"},
+            {"srvCollect3","continuous"}
     };
 
     private static String[][] sensors = {
