@@ -113,8 +113,72 @@ public class Autonomous1 extends OpMode {
 
 
     }
-    public void positionA(){
-
+    public void positionBlueA(){
+        double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(45)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+        double sideEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=sideEncoder+r.setEncoder(24)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", -0.5);
+            r.setPower("mtrBackRight", -0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+    }
+    public void positionBlueB(){
+        double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(69)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+    }
+    public void positionBlueC(){
+        double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(91)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+        double sideEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=sideEncoder+r.setEncoder(24)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", -0.5);
+            r.setPower("mtrBackRight", -0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+    }
     }
 
     //stop();
@@ -165,6 +229,6 @@ public class Autonomous1 extends OpMode {
 
 */
 
-}
+// }
 
 

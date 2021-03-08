@@ -31,6 +31,7 @@ public class TestRobotConfig extends RobotConfiguration{
 
     private static String[][] sensors = {
             //{"IMU", "forward"}
+            {"color0","color"}
     };
 
     public String[][] getMotors(){return motors;}
