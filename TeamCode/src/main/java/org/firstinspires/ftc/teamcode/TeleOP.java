@@ -109,11 +109,12 @@ public class TeleOP extends OpMode {
         r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
 
         if (gamepad2.right_bumper) {
-            r.setPower("mtrShoot", -1.0);
+            r.setPower("mtrShoot", 1.0);
         } else if (!gamepad2.right_bumper) {
             r.setPower("mtrShoot", 0.0);
         }
-        boolean arm = false;
+        //Cade Claw Code Replaced
+        /*boolean arm = false;
         boolean claw = false;
         if (gamepad2.a && arm == false) {
             r.setServoPower("srvArm", .75);
@@ -128,7 +129,24 @@ public class TeleOP extends OpMode {
         } else if (gamepad2.b && claw == true) {
             r.setServoPower("srvClaw", -.75);
             claw = false;
-        }
+        }*/
+
+         //2021 CLAW CODE - RZ & SB 
+        if (gamepad1.a == true)
+        { r.setServoPosition("srvClaw", -1.0);}
+        if (gamepad1.x == true) {r.setServoPosition("srvClaw", 1.0);}
+
+        // 2021 COLLECTOR 3 CODE - RZ & SB
+        if(gamepad2.y == true)
+        {r.setServoPower("srvCollect3", -1.0);}
+
+        // 2021 LIFT CODE - RZ & SB
+        if(gamepad1.y == true) {r.setServoPower("mtrAngle", -1.0);}
+        else if(gamepad1.y == false) {r.setPower("mtrAngle", 0.0);}
+
+        if(gamepad1.b == true) {r.setServoPower("mtrAngle", 1.0);}
+        else if(gamepad1.b == false) {r.setPower("mtrAngle", 0.0);}
+//
 //          ***UNUSED DUE TO CURRENT BUILD****
 /*
         if (gamepad2.right_stick_y <= 0.05&&gamepad2.right_stick_y>=-0.05) {

@@ -26,7 +26,7 @@ public class TestRobotConfig extends RobotConfiguration{
 
     private static String[][] servos = {
             {"srvArm","continuous"},
-            {"srvClaw","continuous"},
+            {"srvClaw"},
             {"srvCollect3","continuous"}
     };
 
