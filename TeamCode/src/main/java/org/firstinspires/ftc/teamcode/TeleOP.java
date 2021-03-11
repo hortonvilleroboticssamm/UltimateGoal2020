@@ -37,6 +37,55 @@ public class TeleOP extends OpMode {
 
     @Override
     public void loop() {
+        // Current 2021 Drive Train
+        r.setPower("mtrFrontLeft", gamepad1.left_stick_y);
+        r.setPower("mtrBackLeft", gamepad1.left_stick_y);
+        r.setPower("mtrFrontRight", gamepad1.right_stick_y);
+        r.setPower("mtrBackRight", gamepad1.right_stick_y);
+        // Current 2021 Collector Motors
+        r.setPower("mtrCollect1", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
+        r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
+
+        // Current 2021 Fire control
+        if (gamepad2.right_bumper) {
+            r.setPower("mtrShoot", 1.0);
+        } else if (!gamepad2.right_bumper) {
+            r.setPower("mtrShoot", 0.0);
+        }
+        //2021 CLAW CODE - RZ & SB 
+        if (gamepad1.a == true)
+        { r.setServoPosition("srvClaw", 0.0);}
+        if (gamepad1.x == true) {r.setServoPosition("srvClaw", .82);}
+
+        /* 2021 COLLECTOR 3 CODE - RZ & SB--Removed in rebuild
+        if(gamepad2.y == true)
+        {r.setServoPower("srvCollect3", -1.0);}
+        */
+
+        // 2021 LIFT CODE - RZ & SB
+        if(gamepad1.y == true) {r.setServoPower("mtrAngle", -1.0);}
+        else if(gamepad1.y == false) {r.setPower("mtrAngle", 0.50);}
+
+        if(gamepad1.b == true) {r.setServoPower("mtrAngle", 1.0);}
+        else if(gamepad1.b == false) {r.setPower("mtrAngle", 0.50);}
+
+        //2021 Arm Code
+
+        if (gamepad2.a) {
+            r.setServoPower("srvArm",-1.00);}
+         else if (gamepad2.a == false) {
+            r.setServoPower("srvArm", .50);
+    }
+
+         if (gamepad2.b) {
+        r.setServoPower("srvArm",1.00);}
+        else if (gamepad2.b == false) {
+        r.setServoPower("srvArm", .50);}
+
+
+
+        // UnUsed Code as of March 2021
+
         //r.getAngle();
         //CONTROLLER 1
         //testxcvzv
@@ -51,12 +100,9 @@ public class TeleOP extends OpMode {
             R. Stick Button -       Cut Right Power
             Left Trigger    -       25% Drive Power
             Left Bumper     -       50% Drive Power
+
              */
 
-        r.setPower("mtrFrontLeft", gamepad1.left_stick_y);
-        r.setPower("mtrBackLeft", gamepad1.left_stick_y);
-        r.setPower("mtrFrontRight", gamepad1.right_stick_y);
-        r.setPower("mtrBackRight", gamepad1.right_stick_y);
 
 //        WobbleGoalGetter wobbleGoalGetter = new WobbleGoalGetter(r);
 //        telemetry.addData("Color Reading Red", wobbleGoalGetter.getRed(false));
@@ -105,14 +151,7 @@ public class TeleOP extends OpMode {
 //            isCollecting = !isCollecting;
 //        } else if (!gamepad1.a) g1AP = false;
 
-        r.setPower("mtrCollect1", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
-        r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
 
-        if (gamepad2.right_bumper) {
-            r.setPower("mtrShoot", 1.0);
-        } else if (!gamepad2.right_bumper) {
-            r.setPower("mtrShoot", 0.0);
-        }
         //Cade Claw Code Replaced
         /*boolean arm = false;
         boolean claw = false;
@@ -131,21 +170,7 @@ public class TeleOP extends OpMode {
             claw = false;
         }*/
 
-         //2021 CLAW CODE - RZ & SB 
-        if (gamepad1.a == true)
-        { r.setServoPosition("srvClaw", -1.0);}
-        if (gamepad1.x == true) {r.setServoPosition("srvClaw", 1.0);}
 
-        // 2021 COLLECTOR 3 CODE - RZ & SB
-        if(gamepad2.y == true)
-        {r.setServoPower("srvCollect3", -1.0);}
-
-        // 2021 LIFT CODE - RZ & SB
-        if(gamepad1.y == true) {r.setServoPower("mtrAngle", -1.0);}
-        else if(gamepad1.y == false) {r.setPower("mtrAngle", 0.0);}
-
-        if(gamepad1.b == true) {r.setServoPower("mtrAngle", 1.0);}
-        else if(gamepad1.b == false) {r.setPower("mtrAngle", 0.0);}
 //
 //          ***UNUSED DUE TO CURRENT BUILD****
 /*

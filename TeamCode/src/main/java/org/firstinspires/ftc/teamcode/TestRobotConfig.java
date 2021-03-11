@@ -26,13 +26,14 @@ public class TestRobotConfig extends RobotConfiguration{
 
     private static String[][] servos = {
             {"srvArm","continuous"},
-            {"srvClaw"},
-            {"srvCollect3","continuous"}
+            {"srvClaw"}
+            //,{"srvCollect3","continuous"}
     };
 
     private static String[][] sensors = {
             //{"IMU", "forward"}
-            {"color0","color"}
+            {"color0","color"},
+            {"color1","color"}
     };
 
     public String[][] getMotors(){return motors;}
