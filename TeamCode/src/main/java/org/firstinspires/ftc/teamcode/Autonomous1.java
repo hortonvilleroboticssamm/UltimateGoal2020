@@ -84,6 +84,7 @@ public class Autonomous1 extends OpMode {
 //    @Override
 //}n
 
+    // Cade Help!
     double frontRightEncoder;
 
     public void init() {

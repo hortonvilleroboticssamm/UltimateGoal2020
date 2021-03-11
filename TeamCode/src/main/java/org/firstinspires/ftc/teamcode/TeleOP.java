@@ -64,23 +64,23 @@ public class TeleOP extends OpMode {
 
         // 2021 LIFT CODE - RZ & SB
         if(gamepad1.y == true) {r.setServoPower("mtrAngle", -1.0);}
-        else if(gamepad1.y == false) {r.setPower("mtrAngle", 0.50);}
+        else if(gamepad1.y == false) {r.setPower("mtrAngle", 0.0);}
 
         if(gamepad1.b == true) {r.setServoPower("mtrAngle", 1.0);}
-        else if(gamepad1.b == false) {r.setPower("mtrAngle", 0.50);}
+        else if(gamepad1.b == false) {r.setPower("mtrAngle", 0.0);}
 
         //2021 Arm Code
 
         if (gamepad2.a) {
             r.setServoPower("srvArm",-1.00);}
          else if (gamepad2.a == false) {
-            r.setServoPower("srvArm", .50);
+            r.setServoPower("srvArm", 0);
     }
 
          if (gamepad2.b) {
         r.setServoPower("srvArm",1.00);}
         else if (gamepad2.b == false) {
-        r.setServoPower("srvArm", .50);}
+        r.setServoPower("srvArm", 0);}
 
 
 
