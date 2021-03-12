@@ -94,23 +94,22 @@ public class Autonomous1 extends OpMode {
     }
 
     public void loop() {
-
-        if (r.getEncoderCounts("mtrFrontRight") > frontRightEncoder - 3000) {
-            r.setPower("mtrFrontRight", -0.4);
-            r.setPower("mtrFrontLeft", -0.5);
-            r.setPower("mtrBackRight", -0.4);
-            r.setPower("mtrBackLeft", -0.5);
-        } else {
-            r.setPower("mtrBackRight", 0.0);
-            r.setPower("mtrFrontLeft", 0.0);
-            r.setPower("mtrFrontRight", 0.0);
-            r.setPower("mtrBackLeft", 0.0);
+        if(r.getEncoderCounts("mtrFrontRight")>frontRightEncoder-3000){
+            r.setPower("mtrFrontRight",-0.4);
+            r.setPower("mtrFrontLeft",-0.5);
+            r.setPower("mtrBackRight",-0.4);
+            r.setPower("mtrBackLeft",-0.5);
+        }else{
+            r.setPower("mtrFrontRight",0);
+            r.setPower("mtrFrontLeft",0);
+            r.setPower("mtrBackRight",0);
+            r.setPower("mtrBackLeft",0);
         }
-        telemetry.addData("LF Power", r.getPower("mtrFrontLeft"));
-        telemetry.addData("LB Power", r.getPower("mtrBackLeft"));
-        telemetry.addData("RF Power", r.getPower("mtrFrontRight"));
-        telemetry.addData("RB Power", r.getPower("mtrBackRight"));
-//        r.setPower("mtrShoot", -1.0);
+        telemetry.addData("LF Power",r.getPower("mtrFrontLeft"));
+        telemetry.addData("LF Power",r.getPower("mtrBackLeft"));
+        telemetry.addData("LF Power",r.getPower("mtrFrontRight"));
+        telemetry.addData("LF Power",r.getPower("mtrBackRight"));
+    //       r.setPower("mtrShoot", -1.0);
 
 
     }
