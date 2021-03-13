@@ -48,7 +48,7 @@ public class TeleOP extends OpMode {
 
         // Current 2021 Fire control
         if (gamepad2.right_bumper) {
-            r.setPower("mtrShoot", 1.0);
+            r.setPower("mtrShoot", 0.90);
         } else if (!gamepad2.right_bumper) {
             r.setPower("mtrShoot", 0.0);
         }

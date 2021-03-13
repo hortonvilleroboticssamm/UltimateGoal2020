@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode;
 
 
@@ -7,6 +8,7 @@ import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -22,8 +24,8 @@ import java.util.function.BiConsumer;
 
 import hortonvillerobotics.State;
 
-@Autonomous(name = "Autonomous1", group = "Testing")
-public class Autonomous1 extends OpMode {
+@Autonomous(name = "AutoRedLeft", group = "Testing")
+public class AutoRedLeft extends OpMode {
     Robot r;
     //StateMachine sm = new StateMachine();
 
@@ -94,26 +96,66 @@ public class Autonomous1 extends OpMode {
     }
 
     public void loop() {
-        if(r.getEncoderCounts("mtrFrontRight")>frontRightEncoder-3000){
-            r.setPower("mtrFrontRight",-0.4);
-            r.setPower("mtrFrontLeft",-0.5);
-            r.setPower("mtrBackRight",-0.4);
-            r.setPower("mtrBackLeft",-0.5);
+        toRings();
+        ColorSensor color0;
+        ColorSensor color1;
+        color0=hardwareMap.get(ColorSensor.class,"color0");
+        color1=hardwareMap.get(ColorSensor.class,"color1");
+
+        if (color1.red()>240 && color1.green() >100){
+            positionRedC();
+        }else if(color0.red()>240 && color0.green() >100){
+            positionRedB();
         }else{
-            r.setPower("mtrFrontRight",0);
-            r.setPower("mtrFrontLeft",0);
-            r.setPower("mtrBackRight",0);
-            r.setPower("mtrBackLeft",0);
+            positionRedA();
         }
-        telemetry.addData("LF Power",r.getPower("mtrFrontLeft"));
-        telemetry.addData("LF Power",r.getPower("mtrBackLeft"));
-        telemetry.addData("LF Power",r.getPower("mtrFrontRight"));
-        telemetry.addData("LF Power",r.getPower("mtrBackRight"));
-    //       r.setPower("mtrShoot", -1.0);
+
+//        if(r.getEncoderCounts("mtrFrontRight")>frontRightEncoder-3000){
+//            r.setPower("mtrFrontRight",-0.4);
+//            r.setPower("mtrFrontLeft",-0.5);
+//            r.setPower("mtrBackRight",-0.4);
+//            r.setPower("mtrBackLeft",-0.5);
+//        }else{
+//            r.setPower("mtrFrontRight",0);
+//            r.setPower("mtrFrontLeft",0);
+//            r.setPower("mtrBackRight",0);
+//            r.setPower("mtrBackLeft",0);
+//        }
+//        telemetry.addData("LF Power",r.getPower("mtrFrontLeft"));
+//        telemetry.addData("LF Power",r.getPower("mtrBackLeft"));
+//        telemetry.addData("LF Power",r.getPower("mtrFrontRight"));
+//        telemetry.addData("LF Power",r.getPower("mtrBackRight"));
+        //       r.setPower("mtrShoot", -1.0);
 
 
     }
-    public void positionBlueA(){
+    public void toRings(){
+        double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(30)){
+            r.setPower("mtrFrontRight", 0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", 0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+        double sideEncoder=r.getEncoderCounts("mtrFrontRight");
+        if(r.getEncoderCounts("mtrFrontRight")<=sideEncoder+r.setEncoder(12)){
+            r.setPower("mtrFrontRight", -0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", -0.5);
+        }else{
+            r.setPower("mtrFrontRight", 0.0);
+            r.setPower("mtrFrontLeft", 0.0);
+            r.setPower("mtrBackRight", 0.0);
+            r.setPower("mtrBackLeft", 0.0);
+        }
+    }
+    public void positionRedA(){
         double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
         if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(45)){
             r.setPower("mtrFrontRight", 0.5);
@@ -128,10 +170,10 @@ public class Autonomous1 extends OpMode {
         }
         double sideEncoder=r.getEncoderCounts("mtrFrontRight");
         if(r.getEncoderCounts("mtrFrontRight")<=sideEncoder+r.setEncoder(24)){
-            r.setPower("mtrFrontRight", 0.5);
-            r.setPower("mtrFrontLeft", -0.5);
-            r.setPower("mtrBackRight", -0.5);
-            r.setPower("mtrBackLeft", 0.5);
+            r.setPower("mtrFrontRight", -0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", -0.5);
         }else{
             r.setPower("mtrFrontRight", 0.0);
             r.setPower("mtrFrontLeft", 0.0);
@@ -139,7 +181,7 @@ public class Autonomous1 extends OpMode {
             r.setPower("mtrBackLeft", 0.0);
         }
     }
-    public void positionBlueB(){
+    public void positionRedB(){
         double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
         if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(69)){
             r.setPower("mtrFrontRight", 0.5);
@@ -153,7 +195,7 @@ public class Autonomous1 extends OpMode {
             r.setPower("mtrBackLeft", 0.0);
         }
     }
-    public void positionBlueC(){
+    public void positionRedC(){
         double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
         if(r.getEncoderCounts("mtrFrontRight")<=forwardEncoder+r.setEncoder(91)){
             r.setPower("mtrFrontRight", 0.5);
@@ -168,10 +210,10 @@ public class Autonomous1 extends OpMode {
         }
         double sideEncoder=r.getEncoderCounts("mtrFrontRight");
         if(r.getEncoderCounts("mtrFrontRight")<=sideEncoder+r.setEncoder(24)){
-            r.setPower("mtrFrontRight", 0.5);
-            r.setPower("mtrFrontLeft", -0.5);
-            r.setPower("mtrBackRight", -0.5);
-            r.setPower("mtrBackLeft", 0.5);
+            r.setPower("mtrFrontRight", -0.5);
+            r.setPower("mtrFrontLeft", 0.5);
+            r.setPower("mtrBackRight", 0.5);
+            r.setPower("mtrBackLeft", -0.5);
         }else{
             r.setPower("mtrFrontRight", 0.0);
             r.setPower("mtrFrontLeft", 0.0);
@@ -179,10 +221,9 @@ public class Autonomous1 extends OpMode {
             r.setPower("mtrBackLeft", 0.0);
         }
     }
+}
 
-    }
-
-    //stop();
+//stop();
 
 
 //        @Override
@@ -233,3 +274,8 @@ public class Autonomous1 extends OpMode {
 // }
 
 
+
+//package org.firstinspires.ftc.teamcode;
+//
+//public class AutoRedLeft {
+//}
