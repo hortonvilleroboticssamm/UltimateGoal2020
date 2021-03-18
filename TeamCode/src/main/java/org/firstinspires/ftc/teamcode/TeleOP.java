@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -46,9 +46,9 @@ public class TeleOP extends OpMode {
         r.setPower("mtrCollect1", gamepad2.left_bumper ? 1 : gamepad2.left_trigger > 0.5 ? -1 : 0);
         r.setPower("mtrCollect2", gamepad1.left_bumper ? 1 : gamepad1.left_trigger > 0.5 ? -1 : 0);
 
-        // Current 2021 Fire control
+        // Current 2021 Shooter
         if (gamepad2.right_bumper) {
-            r.setPower("mtrShoot", 0.90);
+            r.setPower("mtrShoot", 0.15);
         } else if (!gamepad2.right_bumper) {
             r.setPower("mtrShoot", 0.0);
         }

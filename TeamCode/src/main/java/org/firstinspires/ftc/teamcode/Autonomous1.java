@@ -91,6 +91,9 @@ public class Autonomous1 extends OpMode {
         r = Robot.getInstance(this, new TestRobotConfig());
         r.initialize(this, new TestRobotConfig());
         frontRightEncoder = r.getEncoderCounts("mtrFrontRight");
+        // Pause Autonomous 4 times - PAUSE CODE == QUESTIONABLE - RZ & SB 2021
+        //r.pause(25,000);
+
     }
 
     public void loop() {
@@ -109,9 +112,13 @@ public class Autonomous1 extends OpMode {
         telemetry.addData("LF Power",r.getPower("mtrBackLeft"));
         telemetry.addData("LF Power",r.getPower("mtrFrontRight"));
         telemetry.addData("LF Power",r.getPower("mtrBackRight"));
-    //       r.setPower("mtrShoot", -1.0);
-
-
+           // Delayed Fire Control - 10 SEC.
+        if (r.getEncoderCounts("mtrFrontRight")<frontRightEncoder-3000) {
+            r.setPower("mtrShoot", 0.15);
+            r.pause(50000);
+            r.setPower("mtrCollect1", 1.0);
+            r.setPower("mtrCollect2", 1.0);
+        }
     }
     public void positionBlueA(){
         double forwardEncoder=r.getEncoderCounts("mtrFrontRight");
